@@ -1,0 +1,178 @@
+{% extends "orders/layout.html" %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static '/orders/css/cart.css' %}">
+{% endblock %}
+
+{% block title %}
+    Ponicchio's Cart
+{% endblock %}
+
+{% block nav %}
+<div class="ml-auto">
+    <a style="font-family: 'Pacifico', cursive;" class="btn btn-danger" href="menu" role="button">Menu</a>
+</div>
+{% endblock %}
+
+{% block body %}
+<!-- Success alert for payment -->
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+<div class="table-responsive">
+    <h1>Cart</h1>
+    <form action="shoppingcart" method="post">
+        {% csrf_token %}
+        <table class="table">
+            {% if ordersum != None %}
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Item</th>
+                <th scope="col">Menu</th>
+                <th scope="col">Size</th>
+                <th scope="col">Toppings</th>
+                <th scope="col">Extras</th>
+                <th scope="col">Status</th>
+                <th scope="col">Price</th>
+                <th scope="col">Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for item in cart.values %}
+                {% if item.status == "Pending" %}
+            <tr>
+                <th scope="row">{{ item.id }}</th>
+                <td>{{ item.item }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.size }}</td>
+                <td>
+                    {{ item.topping1 }}
+                    <hr>
+                    {{ item.topping2 }}
+                    <hr>
+                    {{ item.topping3 }}
+                </td>
+                <td>
+                    {{ item.extra1 }}
+                    <hr>
+                    {{ item.extra2 }}
+                    <hr>
+                    {{ item.extra3 }}
+                </td>
+                <td>{{ item.status }}</td>
+                <td>${{ item.price }}</td>
+                <td>
+                    <button name="item_id" value="{{ item.id }}" type="submit" class="btn btn-outline-warning">Remove</button>
+                </td>
+            </tr>
+                {% endif %}
+                {% endfor %}
+            <tr>
+                <th scope="row">TOTAL</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>${{ ordersum }}</td>
+                <td></td>
+            </tr>
+            </tbody>
+            {% else %}
+            <p>Your cart is empty.</p>
+            {% endif %}
+        </table>
+        </form>
+        <!-- Button trigger modal -->
+        <button style="font-family: 'Pacifico', cursive;" type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+            Proceed to payment
+        </button>
+    <div>
+        <h1>Orders status</h1>
+        <form action="shoppingcart" method="post">
+            {% csrf_token %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Menu</th>
+                    <th scope="col">Toppings</th>
+                    <th scope="col">Extras</th>
+                    <th scope="col">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart.values %}
+                    {% if item.status != "Pending" %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.item }}</td>
+                    <td>{{ item.size }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>
+                        {{ item.topping1 }}
+                        <hr>
+                        {{ item.topping2 }}
+                        <hr>
+                        {{ item.topping3 }}
+                    </td>
+                    <td>
+                        {{ item.extra1 }}
+                        <hr>
+                        {{ item.extra2 }}
+                        <hr>
+                        {{ item.extra3 }}
+                    </td>
+                    <td>{{ item.status }}</td>
+                    <td>${{ item.price }}</td>                
+                </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Payment</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% if ordersum != None %}
+            <div class="modal-body">
+                <p>Your total is: ${{ ordersum }}</p>
+            </div>
+            <div class="modal-footer">
+                <button style="font-family: 'Pacifico', cursive;" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="payment" method="post">
+                    {% csrf_token %}
+                    <button style="font-family: 'Pacifico', cursive;" name="pay" type="submit" class="btn btn-success">Place order</button>
+                </form>
+            </div>
+            {% else %}
+            <div class="modal-body">
+                <p>Your cart is empty</p>
+            </div>
+            <div class="modal-footer">
+                <button style="font-family: 'Pacifico', cursive;" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+     </div>
+</div>
+{% endblock %}

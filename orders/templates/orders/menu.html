@@ -1,0 +1,378 @@
+{% extends "orders/layout.html" %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'orders/css/menu.css' %}">
+{% endblock %}
+
+{% block title %}
+    Pinocchio's Menu
+{% endblock %}
+
+{% block nav %}
+<div class="ml-auto">
+    <button style="font-family: 'Pacifico', cursive;" type="button" class="btn btn-danger" data-toggle="modal" data-target="#cart">
+        Cart
+    </button>
+</div>
+{% endblock %}
+
+{% block body %}
+    <div>
+        <nav class="shadow-sm">
+            <div class="nav nav-tabs flex-nowrap" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active px-5" id="pizza-tab" data-toggle="tab" href="#pizza" role="tab" aria-controls="pizza" aria-selected="true">Pizza</a>
+                <a class="nav-item nav-link px-5" id="subs-tab" data-toggle="tab" href="#subs" role="tab" aria-controls="subs" aria-selected="false">Subs</a>
+                <a class="nav-item nav-link px-5" id="pastas-tab" data-toggle="tab" href="#pastas" role="tab" aria-controls="pastas" aria-selected="false">Pasta</a>
+                <a class="nav-item nav-link px-5" id="salads-tab" data-toggle="tab" href="#salads" role="tab" aria-controls="salads" aria-selected="false">Salads</a>
+                <a class="nav-item nav-link px-5" id="dinnerplatters-tab" data-toggle="tab" href="#dinnerplatters" role="tab" aria-controls="dinnerplatters" aria-selected="false">Dinner Platters</a>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="pizza" role="tabpanel" aria-labelledby="pizza-tab">
+                <!-- PIZZA -->
+                <h1>Pizza</h1>
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active bg-warning" id="pills-regularpizza-tab" data-toggle="pill" href="#pills-regularpizza" role="tab" aria-controls="pills-regularpizza" aria-selected="true">Regular Pizza</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link bg-warning" id="pills-sicilianpizza-tab" data-toggle="pill" href="#pills-sicilianpizza" role="tab" aria-controls="pills-sicilianpizza" aria-selected="false">Sicilian Pizza</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-regularpizza" role="tabpanel" aria-labelledby="pills-regularpizza-tab">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                {% for pizza in regularpizza.values %}
+                                <div class="col-sm-4">
+                                    <div class="card border-warning mb-3">                              
+                                        <div class="card-body">
+                                            {% if pizza.name == "Special" %}
+                                            <div>
+                                                <h5 class="card-title">Regular Pizza with {{ pizza.name }}</h5>
+                                                <small id="emailHelp" class="form-text text-muted">Special with <strong>ALL</strong> the available toppings!</small>
+                                            </div>
+                                            {% else %}
+                                            <div>
+                                                <h5 class="card-title">Regular Pizza with {{ pizza.name }}</h5>
+                                            </div>
+                                            {% endif %}
+                                            <div class="form-group">
+                                                <select id="price" name="price" class="form-control" required>
+                                                    <option selected disabled>Price</option>
+                                                    <option value="small_price">Small 12" ${{ pizza.small_price }}</option>
+                                                    <option value="large_price">Large 16" ${{ pizza.large_price }}</option>
+                                                </select>
+                                            </div>
+                                            {% if pizza.topping_count == 1 %}
+                                            <div class="form-group">
+                                                <select id="topping1" name="topping1" class="form-control" required>
+                                                    <option selected disabled>Toppings</option>
+                                                    {% for topping in toppings %}
+                                                    <option value="{{ topping.id }}">{{ topping }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            {% elif pizza.topping_count == 2 %}
+                                            <div class="form-group">
+                                                <select id="topping1" name="topping1" class="form-control" required>
+                                                    <option selected disabled>Toppings</option>
+                                                    {% for topping in toppings %}
+                                                    <option value="{{ topping.id }}">{{ topping }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <select id="topping2" name="topping2" class="form-control" required>
+                                                    <option selected disabled>Toppings</option>
+                                                    {% for topping in toppings %}
+                                                    <option value="{{ topping.id }}">{{ topping }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            {% elif pizza.topping_count == 3 %}
+                                            <div class="form-group">
+                                                <select id="topping1" name="topping1" class="form-control" required>
+                                                    <option selected disabled>Toppings</option>
+                                                    {% for topping in toppings %}
+                                                    <option value="{{ topping.id }}">{{ topping }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <select id="topping2" name="topping2" class="form-control" required>
+                                                    <option selected disabled>Toppings</option>
+                                                    {% for topping in toppings %}
+                                                    <option value="{{ topping.id }}">{{ topping }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <select id="topping3" name="topping3" class="form-control" required>
+                                                    <option selected disabled>Toppings</option>
+                                                    {% for topping in toppings %}
+                                                    <option value="{{ topping.id }}">{{ topping }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            {% endif %}
+                                            <input name="type" type="hidden" value="Regular Pizza">
+                                            <button id="addtocart" name="button" value="{{ pizza.id }}" type="submit" class="btn btn-outline-warning">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="pills-sicilianpizza" role="tabpanel" aria-labelledby="pills-sicilianpizza-tab">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                {% for pizza in sicilianpizza %}
+                                    <div class="col-sm-4">
+                                        <div class="card border-warning mb-3">
+                                            <div class="card-body">
+                                                {% if pizza.name == "Special" %}
+                                                <div>
+                                                    <h5 class="card-title">Sicilian Pizza with {{ pizza.name }}</h5>
+                                                    <small id="emailHelp" class="form-text text-muted">Special with <strong>ALL</strong> the available toppings!</small>
+                                                </div>
+                                                {% else %}
+                                                <div>
+                                                    <h5 class="card-title">Sicilian Pizza with {{ pizza.name }}</h5>
+                                                </div>
+                                                {% endif %}
+                                                <div class="form-group">
+                                                    <select id="price" name="price" class="form-control" required>
+                                                        <option selected disabled>Price</option>
+                                                        <option value="small_price">Small 12" ${{ pizza.small_price }}</option>
+                                                        <option value="large_price">Large 16" ${{ pizza.large_price }}</option>
+                                                    </select>
+                                                </div>
+                                                {% if pizza.topping_count == 1 %}
+                                            <div class="form-group">
+                                                <select id="topping1" name="topping1" class="form-control" required>
+                                                    <option selected disabled>Toppings</option>
+                                                    {% for topping in toppings %}
+                                                    <option value="{{ topping.id }}">{{ topping }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            {% elif pizza.topping_count == 2 %}
+                                            <div class="form-group">
+                                                <select id="topping1" name="topping1" class="form-control" required>
+                                                    <option selected disabled>Toppings</option>
+                                                    {% for topping in toppings %}
+                                                    <option value="{{ topping.id }}">{{ topping }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <select id="topping2" name="topping2" class="form-control" required>
+                                                    <option selected disabled>Toppings</option>
+                                                    {% for topping in toppings %}
+                                                    <option value="{{ topping.id }}">{{ topping }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            {% elif pizza.topping_count == 3 %}
+                                            <div class="form-group">
+                                                <select id="topping1" name="topping1" class="form-control" required>
+                                                    <option selected disabled>Toppings</option>
+                                                    {% for topping in toppings %}
+                                                    <option value="{{ topping.id }}">{{ topping }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <select id="topping2" name="topping2" class="form-control" required>
+                                                    <option selected disabled>Toppings</option>
+                                                    {% for topping in toppings %}
+                                                    <option value="{{ topping.id }}">{{ topping }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <select id="topping3" name="topping3" class="form-control" required>
+                                                    <option selected disabled>Toppings</option>
+                                                    {% for topping in toppings %}
+                                                    <option value="{{ topping.id }}">{{ topping }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            {% endif %}
+                                            <input name="type" type="hidden" value="Sicilian Pizza">
+                                            <button id="addtocart" name="button" value="{{ pizza.id }}" type="submit" class="btn btn-outline-warning">Add to Cart</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- SUBS -->
+            <div class="tab-pane fade" id="subs" role="tabpanel" aria-labelledby="subs-tab">
+                <h1>Subs</h1>
+                <form action="sub" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        {% for sub in subs.values %}
+                        <div class="col-sm-4">
+                            <div class="card border-warning mb-3">
+                                <div class="card-body">
+                                    <div>
+                                        <h5 class="card-title">{{ sub.menu }}</h5>
+                                    </div>
+                                    <div class="form-group">
+                                        <select id="price" name="price" class="form-control" required>
+                                            <option selected disabled>Price</option>
+                                            {% if sub.small_price != 0 and sub.large_price != 0 %}
+                                            <option value="Small">Small ${{ sub.small_price }}</option>
+                                            <option value="Large">Large ${{ sub.large_price }}</option>
+                                            {% elif sub.small_price == 0 and sub.large_price != 0 %}
+                                            <option value="Large">Large ${{ sub.large_price }}</option>
+                                            {% elif sub.small_price != 0 and sub.large_price == 0 %}
+                                            <option value="Large">Small ${{ sub.large_price }}</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    {% if sub.extra_count == 1 %}
+                                    {% for extra in subextras.values %}
+                                    <div class="form-group">
+                                        <select id="extra1" name="extra1" class="form-control" required>
+                                            <option selected disabled>Extras</option>
+                                            <option value="{{ extra.id }}">{{ extra.name }} +${{ extra.small_price }}</option>
+                                        </select>
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                        {% if sub.menu == "Steak" or sub.menu == "Steak + Cheese" %}
+                                        {% if sub.extra_count == 3 %}
+                                        <div class="form-group">
+                                            <select id="extra1" name="extra1" class="form-control" required>
+                                                <option selected disabled>Extras</option>
+                                                {% for extra in steakextras.values %}
+                                                <option value="{{ extra.id }}">{{ extra.name }} +${{ extra.small_price }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select id="extra2" name="extra2" class="form-control" required>
+                                                <option selected disabled>Extras</option>
+                                                {% for extra in steakextras.values %}
+                                                <option value="{{ extra.id }}">{{ extra.name }} +${{ extra.small_price }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select id="extra3" name="extra3" class="form-control" required>
+                                                <option selected disabled>Extras</option>
+                                                {% for extra in steakextras.values %}
+                                                <option value="{{ extra.id }}">{{ extra.name }} +${{ extra.small_price }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        {% endif %}
+                                        {% endif %}
+                                    <input name="type" type="hidden" value="Sub">
+                                    <button id="addtocart" name="button" value="{{ sub.id }}" type="submit" class="btn btn-outline-warning">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+            <!-- PASTA -->
+            <div class="tab-pane fade" id="pastas" role="tabpanel" aria-labelledby="pastas-tab">
+                <h1>Pasta</h1>
+                <form action="pasta" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        {% for pasta in pastas.values %}
+                        <div class="col-sm">
+                            <div class="card border-warning mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ pasta.menu }}</h5>
+                                    <div class="form-group">
+                                        <select id="price" name="price" class="form-control" required>
+                                            <option selected disabled>Price</option>
+                                            <option value="Normal">${{ pasta.price }}</option>
+                                        </select>
+                                    </div>
+                                    <input name="type" type="hidden" value="Pasta">
+                                    <button id="addtocart" name="button" value="{{ pasta.id }}" type="submit" class="btn btn-outline-warning">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>    
+                </form>
+            </div>
+            <!-- SALAD -->
+            <div class="tab-pane fade" id="salads" role="tabpanel" aria-labelledby="salads-tab">
+                <h1>Salad</h1>
+                <form action="salad" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        {% for salad in salads.values %}
+                        <div class="col-sm-4">
+                            <div class="card border-warning mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ salad.menu }}</h5>
+                                    <div class="form-group">
+                                        <select id="price" name="price" class="form-control" required>
+                                            <option selected disabled>Price</option>
+                                            <option value="Normal">${{ salad.price }}</option>
+                                        </select>
+                                    </div>
+                                    <input name="type" type="hidden" value="Salad">
+                                    <button id="addtocart" name="button" value="{{ salad.id }}" type="submit" class="btn btn-outline-warning">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>    
+                </form>
+            </div>
+            <!-- DINNER PLATTER -->
+            <div class="tab-pane fade" id="dinnerplatters" role="tabpanel" aria-labelledby="dinnerplatters-tab">
+                <h1>Dinner Platter</h1>
+                <form action="dinnerplatter" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        {% for dinnerplatter in dinnerplatters.values %}
+                        <div class="col-sm-4">
+                            <div class="card border-warning mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ dinnerplatter.menu }}</h5>
+                                    <div class="form-group">
+                                        <select id="price" name="price" class="form-control" required>
+                                            <option selected disabled>Price</option>
+                                            <option value="Small">Small ${{ dinnerplatter.small_price }}</option>
+                                            <option value="Large">Large ${{ dinnerplatter.large_price }}</option>
+                                        </select>
+                                    </div>
+                                    <input name="type" type="hidden" value="Dinner Platter">
+                                    <button id="addtocart" name="button" value="{{ dinnerplatter.id }}" type="submit" class="btn btn-outline-warning">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>    
+                </form>
+            </div>
+        </div>
+    </div>  
+    {% block js %}
+        {% load static %}
+        <script src="{% static 'orders/js/menu.js' %}"></script>
+    {% endblock %}
+{% endblock %}

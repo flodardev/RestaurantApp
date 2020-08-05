@@ -1,0 +1,51 @@
+{% extends "orders/layout.html" %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static '/orders/css/login.css' %}">
+{% endblock %}
+
+{% block title %}
+    Pinocchio's Pizza & Subs
+{% endblock %}
+
+{% block body %}
+<!-- Success alert for account made -->
+{% for message in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+<div class="image">
+    <img id="basil" src="{% static 'orders/images/basil.png' %}">
+</div>
+<div class="container">
+    <div id="card" class="shadow-lg card" style="background-color: #6dac4fff;">
+        <div class="card-body">
+            <h5 class="card-title text-center" style="font-family: 'Pacifico', cursive;">Log In</h5>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input name="username" type="text" class="form-control" id="username" aria-describedby="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input name="password" type="password" class="form-control" id="password" required>
+                    <small id="help" class="form-text" style="color: whitesmoke">We'll never share your information with anyone else.</small>
+                </div>
+                <button type="submit" class="btn btn-success" style="font-family: 'Pacifico', cursive;">Log In</button>
+            </form>
+        </div>
+    </div>    
+</div>
+<div>
+    <img id="pizza" src="{% static 'orders/images/pizza2.png' %}">
+</div>
+{% endblock %}
+
+{% block js%}
+{% endblock %}

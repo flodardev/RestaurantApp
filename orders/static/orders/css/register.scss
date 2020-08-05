@@ -1,0 +1,26 @@
+html {
+    overflow: hidden;
+    .container {
+        padding: 10px;
+        display: flex;
+        justify-content: center;        
+        #card {
+            width: 330px;
+        }
+    }
+    .image {
+        position: relative;
+        #basil {
+            top: 0;
+            left: 0;
+            position: absolute;
+            z-index: -1;
+        }
+        #pizza {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: -1;
+        }
+    }
+}

@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",()=>{document.querySelector("#next").onclick=()=>{let e=document.querySelector("#next").closest("#pizza_name").value;console.log(e),document.querySelector("#toppingModalLongTitle").innerHTML=e}});

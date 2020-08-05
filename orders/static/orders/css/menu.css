@@ -1,0 +1,23 @@
+#nav-tab {
+  overflow: auto;
+}
+
+.container {
+  height: 50%;
+  overflow: scroll;
+}
+
+#addtocart {
+  float: bottom;
+  font-family: "Pacifico", cursive;
+}
+
+h1 {
+  font-family: "Pacifico", cursive;
+}
+
+.nav-item a {
+  color: black;
+  text-decoration: none;
+  font-family: "Pacifico", cursive;
+}

@@ -1,0 +1,15 @@
+html {
+  height: auto;
+  overflow: scroll;
+}
+html body {
+  height: 100%;
+}
+html body nav {
+  background-color: #ff9a00;
+}
+html body nav .nav-link, html body nav p {
+  color: whitesmoke;
+  font-size: 20px;
+  font-family: "Pacifico", cursive;
+}

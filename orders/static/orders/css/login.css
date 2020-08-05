@@ -1,0 +1,31 @@
+html {
+  overflow: hidden;
+}
+html body {
+  overflow: hidden;
+}
+html .container {
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+}
+html .container #card {
+  width: 330px;
+}
+html .image {
+  position: relative;
+}
+html .image #basil {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: -1;
+  overflow: hidden;
+}
+html .image #pizza {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  overflow: hidden;
+}

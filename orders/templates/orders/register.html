@@ -1,0 +1,64 @@
+{% extends "orders/layout.html" %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static '/orders/css/register.css' %}">
+{% endblock %}
+
+{% block title %}
+    Pinocchio's Pizza & Subs
+{% endblock %}
+
+{% block body %}
+<div class="image">
+    <img id="basil" src="{% static 'orders/images/basil.png' %}">
+</div>
+<div class="container">
+    <div id="card" class="shadow-lg card" style="background-color: tomato;">
+        <div class="card-body">
+            <h5 class="card-title text-center" style="font-family: 'Pacifico', cursive;">Register</h5>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input name="username" type="text" class="form-control" id="username" autocomplete="off" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="firstname">First Name</label>
+                        <input name="firstname" type="text" class="form-control" id="firstname" autocomplete="off" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="lastname">Last Name</label>
+                        <input name="lastname" type="text" class="form-control" id="lastname" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input name="email" type="email" class="form-control" id="email" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label for="password1">Password</label>
+                    <input name="password1" type="password" class="form-control" id="password1" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label for="password2">Confirm Password</label>
+                    <input name="password2" type="password" class="form-control" id="password2" aria-describedby="passwordHelp" autocomplete="off" required>
+                    <small id="passwordHelp" class="form-text" style="color: whitesmoke">We'll never share your information with anyone else.</small>
+                </div>
+                <button type="submit" class="btn btn-danger" style="font-family: 'Pacifico', cursive;">Register</button>
+                {% for message in messages %}
+                <hr>
+                {{ message }}
+                {% endfor %}
+            </form>
+        </div>
+    </div>    
+</div>
+<div class="image">
+    <img id="pizza" src="{% static 'orders/images/pizza2.png' %}">
+</div>
+{% endblock %}
+
+{% block js%}
+{% endblock %}

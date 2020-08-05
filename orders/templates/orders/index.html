@@ -1,0 +1,29 @@
+{% extends "orders/layout.html" %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static '/orders/css/index.css' %}">
+{% endblock %}
+
+{% block title %}
+    Pinocchio's Pizza & Subs
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div id="main">
+        <section>
+            <h1 class="headline">Pinocchio's<br>Pizza & Subs</h1>
+        </section>
+        <section>
+                <p class="subheader">We sell award-winning sicilian-style pizza <br> and mouth-watering steak subs!</p>
+        </section>
+        <section>
+                <a id="button" href="{% url 'menu' %}" class="btn btn-success btn-lg" role="button">Menu</a>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+{% block js%}
+{% endblock %}
