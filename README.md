@@ -1,15 +1,21 @@
-# Project 3
+# Restaurant App
 
-Web Programming with Python and JavaScript
+A Django app for restaurants.
 
-Hosted on heroku: https://radolfproject3.herokuapp.com/
+## Deployed
 
-Hi! This is a Web App that allows users to browse a restuarant's menu and place orders.
-Users' order status can be updated through a page or email.
-Website admins are able to add certain menu items and update the orders status of users.
+Deployed with Heroku
+https://radolfproject3.herokuapp.com/
 
-Future todo:
-Integrate stripe api
-fix some bugs
-add more front end stylings
-add jquery for ajax
+## Built With
+
+- [Django](https://www.djangoproject.com/) - Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.
+- [Bootstrap](https://getbootstrap.com/) - Build fast, responsive sites with Bootstrap.
+
+## Authors
+
+- **Radolf Lasa** - _Initial work_ - [flodardev](https://github.com/flodardev)
+
+## Acknowledgments
+
+- Part of Harvard's CS50W requirements.
